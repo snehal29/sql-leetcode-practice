@@ -24,3 +24,15 @@ from
 )t
 where temperature > t.pre_temp 
 and DATEDIFF(recordDate , pre_date)= 1
+
+--Approach 2:
+-- Use self join and same conditions
+--
+-- Pattern:
+-- Self Join , DATEDIFF() 
+--
+-- Solution:
+select w1.id from Weather w1 
+join Weather w2 
+on DATEDIFF(w1.recordDate , w2.recordDate) =1
+where w1.temperature > w2.temperature
