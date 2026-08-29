@@ -2,13 +2,25 @@
 -- Difficulty: Easy
 --
 -- Problem:
--- delete all duplicate emails, keeping only one unique email with the smallest id 
+-- find all dates' id with higher temperatures compared to its previous dates (yesterday).
 --
 -- Approach:
--- Use ROW_NUMBER() function where partition based on email and order by id asce, which will give us unique number for each email
--- Use Delete statement and SELF JOIN 
+-- we need id only so select id 
+-- we need to check the previous date and current date temperature so window function LAG() we have to use
+-- Then in where compare greater temperature and date difference should be 1 
+-- 
 -- Pattern:
--- Delete , Self Join 
--- Window function ROW_NUMBER() 
+-- Window function LAG() on temperature and recordDate
+-- Where and DATEDIFF()
 --
 -- Solution:
+Select id 
+from 
+(
+    select id , temperature , recordDate ,
+    LAG(temperature) over(order by recordDate) as pre_temp ,
+    LAG(recordDate) over(order by recordDate) as pre_date
+    from Weather
+)t
+where temperature > t.pre_temp 
+and DATEDIFF(recordDate , pre_date)= 1
