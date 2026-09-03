@@ -2,18 +2,15 @@
 -- Difficulty: Easy
 --
 -- Problem:
--- it has an area of at least three million (i.e., 3000000 km2), or
--- it has a population of at least twenty-five million (i.e., 25000000).
--- Write a solution to find the name, population, and area of the big countries.
+-- Write a solution to find all the classes that have at least five students.
 --
 -- Approach:
--- where 
+-- group by and having , count
 -- 
 -- Pattern:
--- where
+-- group by , having , count ()
 --
 -- Solution:
- select name , population , area
- from World
- where area >= 3000000
- or population >= 25000000
+select class from Courses
+group by class
+having count(*) >=5
