@@ -23,4 +23,15 @@ select  distinct t1.id ,
     end as type
 from Tree t1
 left join Tree t2
-on t1.id = t2.p_id 
+on t1.id = t2.p_id
+
+-- Another approach : Best (Leet Code solution from another user)
+select id,
+(
+    case
+        when p_id is null then 'Root'
+        when id in (select p_id from tree) then 'Inner'
+        else 'Leaf'
+    end
+) as type
+from tree;
