@@ -4,15 +4,17 @@
 -- Problem:
 -- Report for every three line segments whether they can form a triangle.
 --
---   "Leaf": if the node is a leaf node.
---   "Root": if the node is the root of the tree.
---   "Inner": If the node is neither a leaf node nor a root node.
---   Write a solution to report the type of each node in the tree.
 --
 -- Approach:
--- Self join , Case , IS NULL , IS NOT NULL 
+--  To find the triangle can form or not needed two sides > than 3rd one so use case when 
 -- 
 -- Pattern:
--- SELF JOIN and CASE
+-- CASE
 --
 -- Solution:
+select x , y , z ,
+case when (x+y > z) and (y+z> x) and ( x+z > y)  THEN 'Yes'
+     else 'No'
+     end as triangle
+from Triangle
+
