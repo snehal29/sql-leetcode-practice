@@ -12,8 +12,8 @@
 -- CASE
 --
 -- Solution:
-select x , y , z ,
-case when (x+y > z) and (y+z> x) and ( x+z > y)  THEN 'Yes'
+select *,
+     case when (x+y > z) and (y+z> x) and ( x+z > y)  THEN 'Yes'
      else 'No'
      end as triangle
 from Triangle
