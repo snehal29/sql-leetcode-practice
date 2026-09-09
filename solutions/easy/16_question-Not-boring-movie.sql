@@ -2,18 +2,16 @@
 -- Difficulty: Easy
 --
 -- Problem:
--- Report for every three line segments whether they can form a triangle.
+-- Write a solution to report the movies with an odd-numbered ID and a description that is not "boring". Return the result table ordered by rating in descending order.
 --
 --
 -- Approach:
---  To find the triangle can form or not needed two sides > than 3rd one so use case when 
+-- id%2 and NOT IN 
 -- 
 -- Pattern:
--- CASE
+-- where , % , NOT IN
 --
 -- Solution:
-select *,
-     case when (x+y > z) and (y+z> x) and ( x+z > y)  THEN 'Yes'
-     else 'No'
-     end as triangle
-from Triangle
+select * from Cinema
+where id%2 = 1 and description NOT IN ('boring')
+order by rating desc
