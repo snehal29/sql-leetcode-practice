@@ -1,0 +1,14 @@
+-- LeetCode #619: Biggest Single Number
+-- Difficulty: Easy
+--
+-- Problem:
+--
+--
+--
+-- Approach:
+--  
+-- 
+-- Pattern:
+-- 
+--
+-- Solution:
