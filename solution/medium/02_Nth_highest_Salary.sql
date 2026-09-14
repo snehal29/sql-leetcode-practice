@@ -1,15 +1,15 @@
--- LeetCode #176: Highest second salary
+-- LeetCode #177: Nth Highest  salary
 -- Difficulty: Easy
 --
 -- Problem:
--- Write a solution to find the second highest distinct salary from the Employee table. If there is no second highest salary, return null (return None in Pandas).
+-- Write a solution to find the nth highest distinct salary from the Employee table. If there are less than n distinct salaries, return null.
 --
 -- Approach:
--- Subquery and max
+-- Window function - dense_rank 
 -- 
 --
 -- Pattern:
--- Subquery , max and where
+-- DENSE_RANK()
 --
 -- Solution:
 select max(distinct salary) as SecondHighestSalary 
