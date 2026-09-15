@@ -12,7 +12,8 @@
 -- Inner Join , Group by , round() , AVG()
 --
 -- Solution:
-Update Salary set sex = case
-  when sex='f' then 'm'
-  when sex='m' then 'f'
-end
+select p.project_id , round(avg(e.experience_years),2) as average_years 
+from Project p
+inner join Employee e
+on e.employee_id = p.employee_id
+group by project_id
