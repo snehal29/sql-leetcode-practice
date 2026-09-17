@@ -12,7 +12,7 @@
 -- another way is to Date difference greater and less than 0 and 30 
 --
 -- Pattern:
--- GROUP BY , COUNT() , DATE_SUB  
+-- GROUP BY , COUNT() , DATE_SUB , DATE_DIFF
 --
 -- Solution:
 SELECT activity_date AS day, COUNT(DISTINCT user_id) AS active_users
