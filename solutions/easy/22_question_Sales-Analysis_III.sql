@@ -5,14 +5,15 @@
 -- Write a solution to report the products that were only sold in the first quarter of 2019. That is, between 2019-01-01 and 2019-03-31 inclusive.
 --
 -- Approach:
--- Inner Join on employee_id , Group by on project_id , round() , AVG(experience_years)
+-- LEFT JOIN , GROUP BY on product_id and MIN and MAX function with HAVING 
 -- 
 -- Pattern:
--- Inner Join , Group by , round() , AVG()
+-- LEFT JOIN and GROUP BY also MIN() , MAX() 
 --
 -- Solution:
-select p.project_id , round(avg(e.experience_years),2) as average_years 
-from Project p
-inner join Employee e
-on e.employee_id = p.employee_id
-group by project_id
+SELECT p.product_id , p.product_name
+FROM Product p
+LEFT JOIN Sales s
+ON p.product_id = s.product_id
+GROUP BY s.product_id
+HAVING MIN(s.sale_date) >= '2019-01-01' AND MAX(s.sale_date)<= '2019-03-31';
