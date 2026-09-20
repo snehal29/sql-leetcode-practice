@@ -13,12 +13,14 @@
 -- Cat queries quality equals ((2 / 5) + (3 / 3) + (4 / 7)) / 3 = 0.66
 -- Cat queries poor_ query_percentage is (1 / 3) * 100 = 33.33
 -- Approach:
--- So use group by for identifying the quality_name per group , use round() function also sum() , case when 
+-- So use group by for identifying the quality_name per group , use round() function also sum() , count(*) ,case when 
 --
 -- Pattern:
--- WHERE and  ORDER BY
+-- MATH and group by
 --
 -- Solution:
-select distinct author_id as id from Views 
-where author_id = viewer_id 
-order by author_id 
+select query_name ,
+round((sum(rating/position))/count(*),2) as quality ,
+round(sum(case when rating < 3 then 1 else 0 end )* 100/count(*),2) as poor_query_percentage
+from Queries
+group by query_name
