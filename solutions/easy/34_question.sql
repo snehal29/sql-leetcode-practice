@@ -1,1 +1,13 @@
-
+-- LeetCode #: 
+-- Difficulty: Easy
+--
+-- Problem:
+-- 
+--
+-- Approach:
+-- 
+-- 
+-- Pattern:
+-- 
+--
+-- Solution:
