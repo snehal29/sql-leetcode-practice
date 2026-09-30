@@ -24,5 +24,11 @@ select * from Users
 where mail like binary '%@leetcode.com'  and
 mail REGEXP '^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode.com$'
 
+-- solution i pandas--
+import pandas as pd
+
+def valid_emails(users: pd.DataFrame) -> pd.DataFrame:
+    df = users['mail'].str.match(r'^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode\.com$')
+    return users.loc[df,['user_id','name','mail']]
 
 
