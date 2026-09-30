@@ -19,3 +19,15 @@ left join Rides r
 on u.id=r.user_id
 group by u.id,u.name
 order by travelled_distance desc , u.name asc 
+
+
+-- solution in pandas--
+
+import pandas as pd
+
+def top_travellers(users: pd.DataFrame, rides: pd.DataFrame) -> pd.DataFrame:
+    df_join = pd.merge(users, rides ,left_on='id', right_on='user_id', how='left')
+    df_group = df_join.groupby(['name','id_x'])['distance'].sum().reset_index()
+    df = df_group.rename(columns ={'distance':'travelled_distance'})
+    df = df[['name','travelled_distance']].sort_values(by=['travelled_distance','name'], ascending =[False,True])
+    return df
