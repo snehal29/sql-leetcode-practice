@@ -21,3 +21,12 @@ group_concat(distinct product order by product asc separator ',') as products
 from Activities
 group by sell_date 
 order by sell_date
+
+--- Answer in pandas ----
+import pandas as pd
+
+def categorize_products(activities: pd.DataFrame) -> pd.DataFrame:
+    df = activities.drop_duplicates().groupby('sell_date')['product'].agg(num_sold='count',products = list).reset_index()
+    df.products = df.products.apply(lambda x: ','.join(sorted(x)))
+
+    return df
