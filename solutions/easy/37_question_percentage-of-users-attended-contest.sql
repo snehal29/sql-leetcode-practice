@@ -1,34 +1,36 @@
--- LeetCode #1587: Bank Account Summary II
+-- LeetCode #1633: Percentage of Users Attended a Contest
 -- Difficulty: Easy
 --
--- Problem:Write a solution to report the name and balance of users with a balance higher than 10000. The balance of an account is equal to the sum of the amounts of all transactions involving that account
---
+-- Problem: Write a solution to find the percentage of the users registered in each contest rounded to two decimals.
+--  Return the result table ordered by percentage in descending order. In case of a tie, order it by contest_id in ascending order.
 --
 -- Approach: 
---  Inner join on account to get common transactions , grouped on the account , having with sum of amount which is > 10000
---
+--  Inner join on user_id and group by on cotest_id and order by parcentage desc and contest_id asce 
+--  to find percentage needed count of user_id into that with 100 and divide as total count of users and round it to 2 digits
 --
 -- Pattern:
--- Inner join , Group by , Having , Sum 
+-- Inner join , group by , order by , round , count 
 --
 -- Solution:
- select u.name  , sum(t.amount) as balance 
- from Users u
- inner join Transactions t
- on u.account = t.account
- group by t.account
- having sum(t.amount) >10000
+Select r.contest_id,
+round(count(distinct u.user_id)*100/(select count(*) from users),2) as percentage
+from users u
+inner join register r
+on u.user_id = r.user_id
+group by r.contest_id
+order by percentage desc , r.contest_id asc
  
 
 --Solution in pandas--
 import pandas as pd
 
-def account_summary(users: pd.DataFrame, transactions: pd.DataFrame) -> pd.DataFrame:
-    df_join = users.merge(transactions , on='account',how ='inner' )
-    df_group = df_join.groupby(['name','account'])['amount'].sum().reset_index(name='balance')
-    df_filter = df_group[df_group['balance']> 10000]
-    df = df_filter[['name','balance']]
+def users_percentage(users: pd.DataFrame, register: pd.DataFrame) -> pd.DataFrame:
+    df_join = users.merge(register , on ='user_id',how ='inner')
+    df_group= df_join.groupby('contest_id').agg(count=('user_id','count')).reset_index()
+    df_group['percentage'] =(df_group['count']*100/len(users)).round(2)
+    df = df_group[['contest_id','percentage']].sort_values(by=['percentage','contest_id'],ascending =[False,True])
     return df
+    
     
 
     
