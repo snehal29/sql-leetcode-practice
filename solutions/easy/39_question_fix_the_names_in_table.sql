@@ -20,14 +20,10 @@ order by user_id
 --Solution in pandas--
 import pandas as pd
 
-def get_average_time(activity: pd.DataFrame) -> pd.DataFrame:
-    start = activity[activity['activity_type']=='start']
-    end = activity[activity['activity_type']=='end']
-    start1= start.groupby('machine_id')['timestamp'].mean()
-    end1=end.groupby('machine_id')['timestamp'].mean()
-    result =(end1-start1).reset_index(name ='processing_time')
-    result['processing_time'] = result['processing_time'].round(3)
-    return result
+def fix_names(users: pd.DataFrame) -> pd.DataFrame:
+    users['name'] = users['name'].str.capitalize() 
+    users = users.sort_values(by='user_id')
+    return users[['user_id','name']]
 
     
     
