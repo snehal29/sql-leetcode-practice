@@ -1,5 +1,5 @@
 -- LeetCode #176: Highest second salary
--- Difficulty: Easy
+-- Difficulty: Medium
 --
 -- Problem:
 -- Write a solution to find the second highest distinct salary from the Employee table. If there is no second highest salary, return null (return None in Pandas).
