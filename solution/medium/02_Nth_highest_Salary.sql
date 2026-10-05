@@ -1,5 +1,5 @@
 -- LeetCode #177: Nth Highest  salary
--- Difficulty: Easy
+-- Difficulty: Medium
 --
 -- Problem:
 -- Write a solution to find the nth highest distinct salary from the Employee table. If there are less than n distinct salaries, return null.
