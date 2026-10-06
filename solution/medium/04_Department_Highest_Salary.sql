@@ -5,25 +5,25 @@
 -- Write a solution to find employees who have the highest salary in each of the departments.
 -- Return the result table in any order.
 --
--- Approach:
--- 
--- 
+-- Approach: Do join on departmentId and use subquery where it compare the max salary with same employee table 
 --
 -- Pattern:
--- Dense_rank()
+-- Inner join , Subquery , max()
 --
 -- Solution:
-SELECT
-    score,
-    DENSE_RANK() OVER (ORDER BY score DESC) as 'rank'
-FROM scores;
+Select d.name as Department , e.name as Employee , e.Salary as Salary
+from Employee e 
+join Department d 
+on e.departmentId = d.id
+where e.salary = (select max(e2.salary) from Employee e2
+where e2.departmentId = e.departmentId)
 
 ---------------------
 --Panda solution---
---- Approach: rank dense_rank , sort ascending= False and drop the id column which is not required in output
+--- Approach:  do merge/join on both df and find high salary using loc and group by and rename all required column name
 import pandas as pd
 
-def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
-    scores['rank']= scores['score'].rank(method='dense', ascending=False)
-    df = scores.drop('id',axis=1).sort_values(by='score',ascending=False)
-    return df
+def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame) -> pd.DataFrame:
+    df_join = pd.merge(employee , department , left_on ='departmentId',right_on='id',how='inner')
+    high_salary = df_join.loc[df_join.groupby('departmentId')['salary'].transform('max')==df_join['salary']]
+    result = high_salary[['name_x','salary','name_y']].rename(columns={'name_y':'Department','name_x':'Employee','salary':'Salary'})
