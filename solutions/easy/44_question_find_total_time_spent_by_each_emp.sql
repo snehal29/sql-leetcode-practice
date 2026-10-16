@@ -6,12 +6,11 @@
 -- Approach: 
 --  Group by the each emp and event_day for having details of each day , then sum the out time minus in time 
 -- Pattern:
--- Group by , SUM , Where
+-- Group by , SUM 
 --
 -- Solution:
 Select event_day as day , emp_id , sum(out_time - in_time) as total_time
 from Employees
-where in_time < out_time
 group by emp_id , event_day
 
  
