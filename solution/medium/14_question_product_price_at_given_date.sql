@@ -5,7 +5,7 @@
 --
 -- Approach:  SUBQUERY to find the price with the given date and less than that if not use coalsce function for rest of the price is 10 
 --
--- Pattern:LEFT JOIN , GROUP BY , COUNT
+-- Pattern: SUBQUERY , COALSCE , WHERE , AND , ORDER BY , LIMIT , DISTINCT
 -- 
 --
 -- Solution:
